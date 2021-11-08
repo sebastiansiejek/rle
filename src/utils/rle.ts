@@ -16,4 +16,20 @@ function compress(text: string) {
   return result
 }
 
-export { compress }
+function decompress(text: string) {
+  let result = ''
+  const splitText = Array.from(text)
+
+  for (let i = 0; i < text.length; i++) {
+    if (i % 2 === 0) {
+      const count = Number(splitText[i])
+      for (let j = 0; j < count; j++) {
+        result += splitText[i + 1]
+      }
+    }
+  }
+
+  return result
+}
+
+export { compress, decompress }
