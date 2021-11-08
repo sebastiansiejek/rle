@@ -14,7 +14,11 @@ const ConvertText = ({
   const [convertedText, setConvertedText] = useState('')
 
   return (
-    <div>
+    <div
+      style={{
+        width: '100%',
+      }}
+    >
       <Typography mb='1rem' variant='h3'>
         {title}
       </Typography>
@@ -22,10 +26,18 @@ const ConvertText = ({
         style={{
           display: 'flex',
           alignItems: 'center',
+          width: '100%',
         }}
       >
-        <div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+          }}
+        >
           <TextField
+            fullWidth
             onChange={(e) => {
               const { value } = e.target
               setText(value)
@@ -41,21 +53,31 @@ const ConvertText = ({
           )}
         </div>
         {convertedText.length > 0 && (
-          <>
+          <div
+            style={{
+              display: 'flex',
+              width: '100%',
+              alignItems: 'center',
+            }}
+          >
             <span
               style={{
                 margin: '0 1rem',
               }}
             >
-              ---
+              -
             </span>
-            <div>
-              <TextField value={convertedText} label={convertedTitle} variant='outlined' disabled />
+            <div
+              style={{
+                flex: 1,
+              }}
+            >
+              <TextField value={convertedText} label={convertedTitle} variant='outlined' fullWidth disabled />
               <Typography variant='body1' mt='.5rem'>
                 sign count: {convertedText.length}
               </Typography>
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>
