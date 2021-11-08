@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
 import { Typography, TextField } from '@mui/material'
 import { compress } from '../../utils/rle'
+import { useState } from 'react'
 
 const CompressText = () => {
   const [text, setText] = useState('')
+  const [compressedText, setCompressText] = useState('')
 
   return (
     <div>
@@ -16,17 +17,37 @@ const CompressText = () => {
           alignItems: 'center',
         }}
       >
-        <TextField onChange={(e) => setText(e.target.value)} label='Text' variant='outlined' />
-        {text && (
+        <div>
+          <TextField
+            onChange={(e) => {
+              const { value } = e.target
+              setText(value)
+              setCompressText(compress(value))
+            }}
+            label='Text'
+            variant='outlined'
+          />
+          {text.length > 0 && (
+            <Typography variant='body1' mt='.5rem'>
+              sign count: {text.length}
+            </Typography>
+          )}
+        </div>
+        {compressedText.length > 0 && (
           <>
             <span
               style={{
                 margin: '0 1rem',
               }}
             >
-              -
+              ---
             </span>
-            <TextField value={compress(text)} label='Compressed text' variant='outlined' disabled />
+            <div>
+              <TextField value={compressedText} label='Compressed text' variant='outlined' disabled />
+              <Typography variant='body1' mt='.5rem'>
+                sign count: {compressedText.length}
+              </Typography>
+            </div>
           </>
         )}
       </div>
