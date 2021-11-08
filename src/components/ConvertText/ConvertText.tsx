@@ -1,15 +1,22 @@
 import { Typography, TextField } from '@mui/material'
-import { compress } from '../../utils/rle'
 import { useState } from 'react'
 
-const CompressText = () => {
+const ConvertText = ({
+  title,
+  convertFunction,
+  convertedTitle,
+}: {
+  title: string
+  convertFunction: (text: string) => string
+  convertedTitle: string
+}) => {
   const [text, setText] = useState('')
-  const [compressedText, setCompressText] = useState('')
+  const [convertedText, setConvertedText] = useState('')
 
   return (
     <div>
       <Typography mb='1rem' variant='h3'>
-        Compress
+        {title}
       </Typography>
       <div
         style={{
@@ -22,7 +29,7 @@ const CompressText = () => {
             onChange={(e) => {
               const { value } = e.target
               setText(value)
-              setCompressText(compress(value))
+              setConvertedText(convertFunction(value))
             }}
             label='Text'
             variant='outlined'
@@ -33,7 +40,7 @@ const CompressText = () => {
             </Typography>
           )}
         </div>
-        {compressedText.length > 0 && (
+        {convertedText.length > 0 && (
           <>
             <span
               style={{
@@ -43,9 +50,9 @@ const CompressText = () => {
               ---
             </span>
             <div>
-              <TextField value={compressedText} label='Compressed text' variant='outlined' disabled />
+              <TextField value={convertedText} label={convertedTitle} variant='outlined' disabled />
               <Typography variant='body1' mt='.5rem'>
-                sign count: {compressedText.length}
+                sign count: {convertedText.length}
               </Typography>
             </div>
           </>
@@ -55,4 +62,4 @@ const CompressText = () => {
   )
 }
 
-export default CompressText
+export default ConvertText
