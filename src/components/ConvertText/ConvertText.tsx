@@ -48,7 +48,7 @@ const ConvertText = ({
           />
           {text.length > 0 && (
             <Typography variant='body1' mt='.5rem'>
-              sign count: {text.length}
+              signs count: {text.length}
             </Typography>
           )}
         </div>
@@ -74,7 +74,7 @@ const ConvertText = ({
             >
               <TextField value={convertedText} label={convertedTitle} variant='outlined' fullWidth disabled />
               <Typography variant='body1' mt='.5rem'>
-                sign count: {convertedText.length}
+                signs count: {convertedText.length}
               </Typography>
             </div>
           </div>
