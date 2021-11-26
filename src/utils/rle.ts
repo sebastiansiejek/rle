@@ -20,12 +20,21 @@ function decompress(text: string) {
   let result = ''
   const splitText = Array.from(text)
 
+  let count = ''
   for (let i = 0; i < text.length; i++) {
-    if (i % 2 === 0) {
-      const count = Number(splitText[i])
-      for (let j = 0; j < count; j++) {
-        result += splitText[i + 1]
+    let sign = splitText[i]
+    const isNumber = Number(sign)
+
+    if (isNumber || sign === '0') {
+      count += splitText[i]
+    }
+
+    if (!isNumber && sign !== '0') {
+      const countNumber = Number(count)
+      for (let j = 0; j < countNumber; j++) {
+        result += splitText[i]
       }
+      count = ''
     }
   }
 
