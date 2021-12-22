@@ -1,3 +1,4 @@
+import CompressFile from './components/CompressFile'
 import ConvertText from './components/ConvertText'
 import { compress, decompress } from './utils/rle'
 
@@ -20,6 +21,9 @@ function App() {
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap' />
         <ConvertText title='Compress' convertFunction={compress} convertedTitle='Compress text' />
         <ConvertText title='Decompress' convertFunction={decompress} convertedTitle='Decompress text' />
+      </div>
+      <div>
+        <CompressFile />
       </div>
     </div>
   )
