@@ -49,7 +49,7 @@ const CompressFile: React.FunctionComponent = () => {
           required
         />
       </label>
-      {file && (
+      {file && !compressedFile?.file && (
         <Button
           variant='outlined'
           style={{
