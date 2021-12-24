@@ -1,4 +1,4 @@
-import { Button, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
+import { Button, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 import React, { useRef, useState } from 'react'
 import { downloadTextFile } from '../../utils/downloadTextFile'
 import { compress } from '../../utils/rle'
@@ -103,6 +103,10 @@ const CompressFile: React.FunctionComponent = () => {
               </TableRow>
             </TableBody>
           </Table>
+          <Typography marginTop={'.4rem'}>
+            {Math.abs(Math.round(((compressedFile.file.size - file.size) / file.size) * 100))}%{' '}
+            {file.size > compressedFile.file.size ? 'less ' : 'more '} than original
+          </Typography>
           <Button
             variant='outlined'
             style={{
