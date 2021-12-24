@@ -6,7 +6,10 @@ import Spinner from '../Spinner'
 const CompressFile: React.FunctionComponent = () => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [file, setFile] = useState<File | ''>()
-  const [compressed, setCompressed] = useState<string>('')
+  const [compressedFile, setCompressedFile] = useState<{
+    file: File | null
+    text: string
+  }>()
   const [isLoading, setLoading] = useState(false)
 
   return (
@@ -33,6 +36,10 @@ const CompressFile: React.FunctionComponent = () => {
           type='file'
           ref={inputRef}
           onChange={(e) => {
+            setCompressedFile({
+              file: null,
+              text: '',
+            })
             if (e.target.files) {
               const file = e.target.files[0]
               setFile(file)
@@ -56,7 +63,13 @@ const CompressFile: React.FunctionComponent = () => {
             reader.addEventListener('loadend', function () {
               const { result } = reader
               const compressedResult = compress(String(result))
-              setCompressed(compressedResult)
+              const compressedFile = new File([compressedResult], `${file.name}`, {
+                type: 'text/plain',
+              })
+              setCompressedFile({
+                file: compressedFile,
+                text: compressedResult,
+              })
               setLoading(false)
             })
           }
@@ -65,14 +78,34 @@ const CompressFile: React.FunctionComponent = () => {
         <span>Compress file</span>
         {isLoading && <Spinner size={15} />}
       </button>
-      {compressed && file && (
-        <button
-          onClick={() => {
-            downloadTextFile(file.name + '-compressed.txt', compressed)
-          }}
-        >
-          Download
-        </button>
+      {file && compressedFile?.file && (
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Original</th>
+                <th>Compressed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <b>Size</b>
+                </td>
+                <td style={{ textAlign: 'center' }}>{file.size} B</td>
+                <td style={{ textAlign: 'center' }}>{compressedFile.file.size} B</td>
+              </tr>
+            </tbody>
+          </table>
+          <button
+            onClick={() => {
+              downloadTextFile(file.name + '-compressed.txt', compressedFile.text)
+            }}
+          >
+            Download
+          </button>
+        </div>
       )}
     </form>
   )
