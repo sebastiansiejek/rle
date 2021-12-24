@@ -86,17 +86,24 @@ const CompressFile: React.FunctionComponent = () => {
       {file && compressedFile?.file && (
         <div>
           <ComparisonTable fileSize={file.size} comparisonFileSize={compressedFile.file.size} />
-          <Button
-            variant='outlined'
+          <div
             style={{
-              marginTop: '1rem',
-            }}
-            onClick={() => {
-              downloadTextFile(file.name + '-compressed.txt', compressedFile.text)
+              display: 'flex',
+              justifyContent: 'center',
             }}
           >
-            Download
-          </Button>
+            <Button
+              variant='outlined'
+              style={{
+                marginTop: '1rem',
+              }}
+              onClick={() => {
+                downloadTextFile(file.name + '-compressed.txt', compressedFile.text)
+              }}
+            >
+              Download
+            </Button>
+          </div>
         </div>
       )}
     </form>
