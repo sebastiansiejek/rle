@@ -6,6 +6,7 @@ import Spinner from '../Spinner'
 const CompressFile: React.FunctionComponent = () => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [file, setFile] = useState<File | ''>()
+  const [compressed, setCompressed] = useState<string>('')
   const [isLoading, setLoading] = useState(false)
 
   return (
@@ -55,12 +56,8 @@ const CompressFile: React.FunctionComponent = () => {
             reader.addEventListener('loadend', function () {
               const { result } = reader
               const compressedResult = compress(String(result))
-              downloadTextFile(file.name + '-compressed.txt', compressedResult)
+              setCompressed(compressedResult)
               setLoading(false)
-              if (inputRef.current) {
-                inputRef.current.value = ''
-              }
-              setFile('')
             })
           }
         }}
@@ -68,6 +65,15 @@ const CompressFile: React.FunctionComponent = () => {
         <span>Compress file</span>
         {isLoading && <Spinner size={15} />}
       </button>
+      {compressed && file && (
+        <button
+          onClick={() => {
+            downloadTextFile(file.name + '-compressed.txt', compressed)
+          }}
+        >
+          Download
+        </button>
+      )}
     </form>
   )
 }
