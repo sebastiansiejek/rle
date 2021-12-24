@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react'
 import { downloadTextFile } from '../../utils/downloadTextFile'
 import { compress } from '../../utils/rle'
 import Spinner from '../Spinner'
+import prettyBytes from 'pretty-bytes'
 
 const CompressFile: React.FunctionComponent = () => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -97,8 +98,8 @@ const CompressFile: React.FunctionComponent = () => {
                 <TableCell>
                   <b>Size</b>
                 </TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{file.size} B</TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{compressedFile.file.size} B</TableCell>
+                <TableCell style={{ textAlign: 'center' }}>{prettyBytes(file.size)}</TableCell>
+                <TableCell style={{ textAlign: 'center' }}>{prettyBytes(compressedFile.file.size)}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
