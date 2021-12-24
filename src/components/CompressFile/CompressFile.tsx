@@ -1,3 +1,4 @@
+import { Button, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
 import React, { useRef, useState } from 'react'
 import { downloadTextFile } from '../../utils/downloadTextFile'
 import { compress } from '../../utils/rle'
@@ -48,63 +49,70 @@ const CompressFile: React.FunctionComponent = () => {
           required
         />
       </label>
-      <button
-        style={{
-          display: 'inline-flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        disabled={isLoading}
-        onClick={() => {
-          if (file) {
-            setLoading(true)
-            const reader = new FileReader()
-            reader.readAsText(file)
-            reader.addEventListener('loadend', function () {
-              const { result } = reader
-              const compressedResult = compress(String(result))
-              const compressedFile = new File([compressedResult], `${file.name}`, {
-                type: 'text/plain',
+      {file && (
+        <Button
+          variant='outlined'
+          style={{
+            display: 'inline-flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          disabled={isLoading}
+          onClick={() => {
+            if (file) {
+              setLoading(true)
+              const reader = new FileReader()
+              reader.readAsText(file)
+              reader.addEventListener('loadend', function () {
+                const { result } = reader
+                const compressedResult = compress(String(result))
+                const compressedFile = new File([compressedResult], `${file.name}`, {
+                  type: 'text/plain',
+                })
+                setCompressedFile({
+                  file: compressedFile,
+                  text: compressedResult,
+                })
+                setLoading(false)
               })
-              setCompressedFile({
-                file: compressedFile,
-                text: compressedResult,
-              })
-              setLoading(false)
-            })
-          }
-        }}
-      >
-        <span>Compress file</span>
-        {isLoading && <Spinner size={15} />}
-      </button>
+            }
+          }}
+        >
+          <span>Compress file</span>
+          {isLoading && <Spinner size={15} />}
+        </Button>
+      )}
       {file && compressedFile?.file && (
         <div>
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                <th>Original</th>
-                <th>Compressed</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell>Original</TableCell>
+                <TableCell>Compressed</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell>
                   <b>Size</b>
-                </td>
-                <td style={{ textAlign: 'center' }}>{file.size} B</td>
-                <td style={{ textAlign: 'center' }}>{compressedFile.file.size} B</td>
-              </tr>
-            </tbody>
-          </table>
-          <button
+                </TableCell>
+                <TableCell style={{ textAlign: 'center' }}>{file.size} B</TableCell>
+                <TableCell style={{ textAlign: 'center' }}>{compressedFile.file.size} B</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+          <Button
+            variant='outlined'
+            style={{
+              marginTop: '1rem',
+            }}
             onClick={() => {
               downloadTextFile(file.name + '-compressed.txt', compressedFile.text)
             }}
           >
             Download
-          </button>
+          </Button>
         </div>
       )}
     </form>
