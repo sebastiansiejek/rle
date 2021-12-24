@@ -1,9 +1,9 @@
-import { Button, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { Button } from '@mui/material'
 import React, { useRef, useState } from 'react'
 import { downloadTextFile } from '../../utils/downloadTextFile'
 import { compress } from '../../utils/rle'
 import Spinner from '../Spinner'
-import prettyBytes from 'pretty-bytes'
+import ComparisonTable from './ComparisonTable'
 
 const CompressFile: React.FunctionComponent = () => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -85,28 +85,7 @@ const CompressFile: React.FunctionComponent = () => {
       )}
       {file && compressedFile?.file && (
         <div>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell></TableCell>
-                <TableCell>Original</TableCell>
-                <TableCell>Compressed</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell>
-                  <b>Size</b>
-                </TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{prettyBytes(file.size)}</TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{prettyBytes(compressedFile.file.size)}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-          <Typography marginTop={'.4rem'}>
-            {Math.abs(Math.round(((compressedFile.file.size - file.size) / file.size) * 100))}%{' '}
-            {file.size > compressedFile.file.size ? 'less ' : 'more '} than original
-          </Typography>
+          <ComparisonTable fileSize={file.size} comparisonFileSize={compressedFile.file.size} />
           <Button
             variant='outlined'
             style={{
