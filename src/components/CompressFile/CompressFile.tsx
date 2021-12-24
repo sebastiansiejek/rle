@@ -1,4 +1,4 @@
-import { Button } from '@mui/material'
+import { Button, InputLabel } from '@mui/material'
 import React, { useRef, useState } from 'react'
 import { downloadTextFile } from '../../utils/downloadTextFile'
 import { compress } from '../../utils/rle'
@@ -22,7 +22,7 @@ const CompressFile: React.FunctionComponent = () => {
         justifyContent: 'start',
       }}
     >
-      <label
+      <InputLabel
         style={{
           cursor: 'pointer',
         }}
@@ -49,7 +49,7 @@ const CompressFile: React.FunctionComponent = () => {
           }}
           required
         />
-      </label>
+      </InputLabel>
       {file && !compressedFile?.file && (
         <Button
           variant='outlined'
