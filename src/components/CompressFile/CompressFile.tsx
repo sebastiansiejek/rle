@@ -29,6 +29,7 @@ const CompressFile: React.FunctionComponent = () => {
       >
         <div
           style={{
+            textAlign: 'left',
             marginBottom: '.5rem',
           }}
         >

@@ -19,11 +19,17 @@ function App() {
         }}
       >
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap' />
-        <ConvertText title='Compress' convertFunction={compress} convertedTitle='Compress text' />
+        <div>
+          <ConvertText title='Compress' convertFunction={compress} convertedTitle='Compress text' />
+          <div
+            style={{
+              marginTop: '1rem',
+            }}
+          >
+            <CompressFile />
+          </div>
+        </div>
         <ConvertText title='Decompress' convertFunction={decompress} convertedTitle='Decompress text' />
-      </div>
-      <div>
-        <CompressFile />
       </div>
     </div>
   )
