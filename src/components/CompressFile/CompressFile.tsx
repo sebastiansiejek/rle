@@ -37,6 +37,7 @@ const CompressFile: React.FunctionComponent = () => {
         <input
           type='file'
           ref={inputRef}
+          accept='.txt'
           onChange={(e) => {
             setCompressedFile({
               file: null,
