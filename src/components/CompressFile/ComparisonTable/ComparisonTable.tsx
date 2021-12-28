@@ -9,6 +9,7 @@ export interface ComparisonTableProps {
 const ComparisonTable: React.FunctionComponent<ComparisonTableProps> = ({ fileSize, comparisonFileSize }) => {
   const percent = Math.abs(Math.round(((comparisonFileSize - fileSize) / fileSize) * 100))
   const isCompressedFileBigger = fileSize > comparisonFileSize ? true : false
+  const difference = Math.abs(fileSize - comparisonFileSize)
 
   return (
     <Table>
@@ -28,9 +29,10 @@ const ComparisonTable: React.FunctionComponent<ComparisonTableProps> = ({ fileSi
           <TableCell style={{ textAlign: 'center' }}>{prettyBytes(comparisonFileSize)}</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell style={{ textAlign: 'center', color: isCompressedFileBigger ? 'green' : 'red' }} colSpan={3}>{`${percent}% ${
-            isCompressedFileBigger ? 'less ' : 'more '
-          } than original`}</TableCell>
+          <TableCell
+            style={{ textAlign: 'center', color: isCompressedFileBigger ? 'green' : 'red' }}
+            colSpan={3}
+          >{`${percent}% (~${prettyBytes(difference)}) ${isCompressedFileBigger ? 'less ' : 'more '} than original`}</TableCell>
         </TableRow>
       </TableBody>
     </Table>
