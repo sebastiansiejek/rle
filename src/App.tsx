@@ -1,5 +1,6 @@
 import CompressFile from './components/CompressFile'
 import ConvertText from './components/ConvertText'
+import DecompressFile from './components/DecompressFile'
 import { compress, decompress } from './utils/rle'
 
 function App() {
@@ -29,7 +30,16 @@ function App() {
             <CompressFile />
           </div>
         </div>
-        <ConvertText title='Decompress' convertFunction={decompress} convertedTitle='Decompress text' />
+        <div>
+          <ConvertText title='Decompress' convertFunction={decompress} convertedTitle='Decompress text' />
+          <div
+            style={{
+              marginTop: '1rem',
+            }}
+          >
+            <DecompressFile />
+          </div>
+        </div>
       </div>
     </div>
   )
