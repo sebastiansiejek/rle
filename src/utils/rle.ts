@@ -10,7 +10,7 @@ function compress(text: string) {
       i++
     }
 
-    result += count + char
+    result += '-' + count + char
   }
 
   return result
@@ -18,23 +18,19 @@ function compress(text: string) {
 
 function decompress(text: string) {
   let result = ''
-  const splitText = Array.from(text)
 
-  let count = ''
   for (let i = 0; i < text.length; i++) {
-    let sign = splitText[i]
-    const isNumber = Number(sign)
+    let sign = text[i]
 
-    if (isNumber || sign === '0') {
-      count += splitText[i]
-    }
+    if (sign === '-' && !Number.isNaN(Number(text[i + 1]))) {
+      let count = parseInt(text[i + 1])
+      let char = text[i + 2]
 
-    if (!isNumber && sign !== '0') {
-      const countNumber = Number(count)
-      for (let j = 0; j < countNumber; j++) {
-        result += splitText[i]
+      for (let j = 0; j < count; j++) {
+        result += char
       }
-      count = ''
+
+      i += 2
     }
   }
 
