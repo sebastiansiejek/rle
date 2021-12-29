@@ -113,7 +113,8 @@ const DecompressFile: React.FunctionComponent<DecompressFileProps> = ({}) => {
                 marginTop: '1rem',
               }}
               onClick={() => {
-                downloadTextFile(file.name + '-decompressed.txt', convertedFile.text)
+                const fileName = `${file.name.split('.')[0]}_decompressed.txt`
+                downloadTextFile(fileName, convertedFile.text)
               }}
             >
               Download

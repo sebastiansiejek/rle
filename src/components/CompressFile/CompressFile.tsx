@@ -111,7 +111,8 @@ const CompressFile: React.FunctionComponent = () => {
                 marginTop: '1rem',
               }}
               onClick={() => {
-                downloadTextFile(file.name + '-compressed.txt', compressedFile.text)
+                const fileName = `${file.name.split('.')[0]}_compressed.txt`
+                downloadTextFile(fileName, compressedFile.text)
               }}
             >
               Download
