@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react'
 import { downloadTextFile } from '../../utils/downloadTextFile'
 import { compress } from '../../utils/rle'
 import Spinner from '../Spinner'
-import ComparisonTable from './ComparisonTable'
+import ComparisonTable from '../ComparisonTable'
 
 const CompressFile: React.FunctionComponent = () => {
   const inputRef = useRef<HTMLInputElement>(null)
