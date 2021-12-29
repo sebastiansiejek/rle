@@ -4,9 +4,12 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
 export interface ComparisonTableProps {
   fileSize: number
   comparisonFileSize: number
+  columns: Array<{
+    title: string
+  }>
 }
 
-const ComparisonTable: React.FunctionComponent<ComparisonTableProps> = ({ fileSize, comparisonFileSize }) => {
+const ComparisonTable: React.FunctionComponent<ComparisonTableProps> = ({ fileSize, comparisonFileSize, columns }) => {
   const percent = Math.abs(Math.round(((comparisonFileSize - fileSize) / fileSize) * 100))
   const isCompressedFileBigger = fileSize > comparisonFileSize ? true : false
   const difference = Math.abs(fileSize - comparisonFileSize)
@@ -16,8 +19,9 @@ const ComparisonTable: React.FunctionComponent<ComparisonTableProps> = ({ fileSi
       <TableHead>
         <TableRow>
           <TableCell></TableCell>
-          <TableCell>Original</TableCell>
-          <TableCell>Compressed</TableCell>
+          {columns.map((column, index) => (
+            <TableCell key={index}>{column.title}</TableCell>
+          ))}
         </TableRow>
       </TableHead>
       <TableBody>

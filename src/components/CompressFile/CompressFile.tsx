@@ -87,7 +87,18 @@ const CompressFile: React.FunctionComponent = () => {
       )}
       {file && compressedFile?.file && (
         <div>
-          <ComparisonTable fileSize={file.size} comparisonFileSize={compressedFile.file.size} />
+          <ComparisonTable
+            fileSize={file.size}
+            comparisonFileSize={compressedFile.file.size}
+            columns={[
+              {
+                title: 'Original',
+              },
+              {
+                title: 'Compressed',
+              },
+            ]}
+          />
           <div
             style={{
               display: 'flex',
