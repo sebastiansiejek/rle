@@ -7,7 +7,7 @@ import ComparisonTable from '../ComparisonTable'
 
 export interface DecompressFileProps {}
 
-const DecompressFile: React.FunctionComponent<DecompressFileProps> = ({}) => {
+const DecompressFile: React.FunctionComponent<DecompressFileProps> = () => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [file, setFile] = useState<File | ''>()
   const [convertedFile, setConvertedFile] = useState<{
