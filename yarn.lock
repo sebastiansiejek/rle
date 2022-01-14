@@ -1986,6 +1986,11 @@
   resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.2.1.tgz#374e31645d58cb18a07b3ecd8e9dede4deb2cccd"
   integrity sha512-DxZZbyMAM9GWEzXL+BMZROWz9oo6A9EilwwOMET2UVu2uZTqMWS5S69KVtuVKaRjCUpcrOXRalet86/OpG4kqw==
 
+"@types/pretty-time@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@types/pretty-time/-/pretty-time-1.1.2.tgz#6d19ff7b76793f589aaf0bd692fd71c763c5abce"
+  integrity sha512-4i+Y+O5H80Rh01lY/3Z0hB/UWc4R64ReE83joEpVsIG3iQWpYx66k6pQh1amJNZquKtJQyu/RcfkTtvL0KwssA==
+
 "@types/prop-types@*", "@types/prop-types@^15.7.4":
   version "15.7.4"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.4.tgz#fcf7205c25dff795ee79af1e30da2c9790808f11"
@@ -9042,6 +9047,11 @@ pretty-format@^27.0.0, pretty-format@^27.3.1:
     ansi-regex "^5.0.1"
     ansi-styles "^5.0.0"
     react-is "^17.0.1"
+
+pretty-time@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/pretty-time/-/pretty-time-1.1.0.tgz#ffb7429afabb8535c346a34e41873adf3d74dd0e"
+  integrity sha512-28iF6xPQrP8Oa6uxE6a1biz+lWeTOAPKggvjB8HAs6nVMKZwf5bG++632Dx614hIWgUPkgivRfG+a8uAXGTIbA==
 
 process-nextick-args@~2.0.0:
   version "2.0.1"
