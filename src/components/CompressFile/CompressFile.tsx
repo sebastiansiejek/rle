@@ -4,6 +4,7 @@ import { downloadTextFile } from '../../utils/downloadTextFile'
 import { compress } from '../../utils/rle'
 import Spinner from '../Spinner'
 import ComparisonTable from '../ComparisonTable'
+import prettyTime from 'pretty-time'
 
 const CompressFile: React.FunctionComponent = () => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -13,6 +14,7 @@ const CompressFile: React.FunctionComponent = () => {
     text: string
   }>()
   const [isLoading, setLoading] = useState(false)
+  const [executiveTime, setExecutiveTime] = useState<string>()
 
   return (
     <form
@@ -63,6 +65,7 @@ const CompressFile: React.FunctionComponent = () => {
           disabled={isLoading}
           onClick={() => {
             if (file) {
+              const start = Date.now()
               setLoading(true)
               const reader = new FileReader()
               reader.readAsText(file)
@@ -77,6 +80,8 @@ const CompressFile: React.FunctionComponent = () => {
                   text: compressedResult,
                 })
                 setLoading(false)
+                const end = Date.now()
+                setExecutiveTime(prettyTime(end - start))
               })
             }
           }}
@@ -90,6 +95,7 @@ const CompressFile: React.FunctionComponent = () => {
           <ComparisonTable
             fileSize={file.size}
             comparisonFileSize={compressedFile.file.size}
+            executionTime={executiveTime}
             columns={[
               {
                 title: 'Original',
